@@ -80,10 +80,9 @@ static const SceneVertex vertices[] =
    CGImageRef imageRef = 
       [[UIImage imageNamed:@"leaves.gif"] CGImage];
       
-   GLKTextureInfo *textureInfo = [GLKTextureLoader 
-      textureWithCGImage:imageRef 
-      options:nil 
-      error:NULL];
+   GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithCGImage:imageRef
+                                                              options:nil
+                                                                error:NULL];
    
    self.baseEffect.texture2d0.name = textureInfo.name;
    self.baseEffect.texture2d0.target = textureInfo.target;

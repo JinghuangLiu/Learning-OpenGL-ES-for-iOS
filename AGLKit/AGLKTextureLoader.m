@@ -105,28 +105,15 @@ static NSData *AGLKDataWithResizedCGImageBytes(
       &width,
       &height);
    
-   // Generation, bind, and copy data into a new texture buffer
-   GLuint      textureBufferID;
+    // Generation, bind, and copy data into a new texture buffer
+    GLuint      textureBufferID;
+    glGenTextures(1, &textureBufferID);                  // Step 1
+    glBindTexture(GL_TEXTURE_2D, textureBufferID);       // Step 2
+    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,[imageData bytes]);
    
-   glGenTextures(1, &textureBufferID);                  // Step 1
-   glBindTexture(GL_TEXTURE_2D, textureBufferID);       // Step 2
-   
-   glTexImage2D(                                        // Step 3
-      GL_TEXTURE_2D, 
-      0, 
-      GL_RGBA, 
-      width,
-      height, 
-      0, 
-      GL_RGBA, 
-      GL_UNSIGNED_BYTE, 
-      [imageData bytes]);
-   
-   // Set parameters that control texture sampling for the bound
-   // texture
-  glTexParameteri(GL_TEXTURE_2D, 
-     GL_TEXTURE_MIN_FILTER, 
-     GL_LINEAR); 
+    // Set parameters that control texture sampling for the bound
+    // texture
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
    
    // Allocate and initialize the AGLKTextureInfo instance to be
    // returned
