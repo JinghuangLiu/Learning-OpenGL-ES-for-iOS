@@ -9,27 +9,19 @@
 
 @interface GLKEffectPropertyTexture (AGLKAdditions)
 
-- (void)aglkSetParameter:(GLenum)parameterID 
-   value:(GLint)value;
+- (void)aglkSetParameter:(GLenum)parameterID value:(GLint)value;
    
 @end
-
 
 @implementation GLKEffectPropertyTexture (AGLKAdditions)
 
-- (void)aglkSetParameter:(GLenum)parameterID 
-   value:(GLint)value;
+- (void)aglkSetParameter:(GLenum)parameterID value:(GLint)value;
 {
    glBindTexture(self.target, self.name);
-
-   glTexParameteri(
-      self.target, 
-      parameterID, 
-      value);
+   glTexParameteri(self.target, parameterID, value);
 }
    
 @end
-
 
 @interface OpenGLES_Ch3_6ViewController ()
 
@@ -165,48 +157,30 @@ static const SceneVertex vertices[] =
       1.0f);// Alpha 
    
    // Create vertex buffer containing vertices to draw
-   self.vertexBuffer = [[AGLKVertexAttribArrayBuffer alloc]
-      initWithAttribStride:sizeof(SceneVertex)
-      numberOfVertices:sizeof(vertices) / sizeof(SceneVertex)
-      bytes:vertices
-      usage:GL_STATIC_DRAW];
-   
+   self.vertexBuffer = [[AGLKVertexAttribArrayBuffer alloc] initWithAttribStride:sizeof(SceneVertex)
+                                                                numberOfVertices:sizeof(vertices) / sizeof(SceneVertex)
+                                                                           bytes:vertices
+                                                                           usage:GL_STATIC_DRAW];
    // Setup texture0
-   CGImageRef imageRef0 = 
-      [[UIImage imageNamed:@"leaves.gif"] CGImage];
-      
-   GLKTextureInfo *textureInfo0 = [GLKTextureLoader 
-      textureWithCGImage:imageRef0 
-      options:[NSDictionary dictionaryWithObjectsAndKeys:
-         [NSNumber numberWithBool:YES], 
-         GLKTextureLoaderOriginBottomLeft, nil] 
-      error:NULL];
-      
+   CGImageRef imageRef0 = [[UIImage imageNamed:@"leaves.gif"] CGImage];
+   GLKTextureInfo *textureInfo0 = [GLKTextureLoader textureWithCGImage:imageRef0
+                                                               options:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],GLKTextureLoaderOriginBottomLeft, nil]
+                                                                 error:NULL];
    self.baseEffect.texture2d0.name = textureInfo0.name;
    self.baseEffect.texture2d0.target = textureInfo0.target;
-   [self.baseEffect.texture2d0 aglkSetParameter:GL_TEXTURE_WRAP_S 
-      value:GL_REPEAT];
-   [self.baseEffect.texture2d0 aglkSetParameter:GL_TEXTURE_WRAP_T 
-      value:GL_REPEAT];
+   [self.baseEffect.texture2d0 aglkSetParameter:GL_TEXTURE_WRAP_S value:GL_REPEAT];
+   [self.baseEffect.texture2d0 aglkSetParameter:GL_TEXTURE_WRAP_T value:GL_REPEAT];
          
    // Setup texture1
-   CGImageRef imageRef1 = 
-      [[UIImage imageNamed:@"beetle.png"] CGImage];
-      
-   GLKTextureInfo *textureInfo1 = [GLKTextureLoader 
-      textureWithCGImage:imageRef1 
-      options:[NSDictionary dictionaryWithObjectsAndKeys:
-         [NSNumber numberWithBool:YES], 
-         GLKTextureLoaderOriginBottomLeft, nil] 
-      error:NULL];
-
+   CGImageRef imageRef1 = [[UIImage imageNamed:@"beetle.png"] CGImage];
+   GLKTextureInfo *textureInfo1 = [GLKTextureLoader textureWithCGImage:imageRef1
+                                                               options:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],GLKTextureLoaderOriginBottomLeft, nil]
+                                                                 error:NULL];
    self.baseEffect.texture2d1.name = textureInfo1.name;
    self.baseEffect.texture2d1.target = textureInfo1.target;
    self.baseEffect.texture2d1.envMode = GLKTextureEnvModeDecal;
-   [self.baseEffect.texture2d1 aglkSetParameter:GL_TEXTURE_WRAP_S 
-      value:GL_REPEAT];
-   [self.baseEffect.texture2d1 aglkSetParameter:GL_TEXTURE_WRAP_T 
-      value:GL_REPEAT];
+   [self.baseEffect.texture2d1 aglkSetParameter:GL_TEXTURE_WRAP_S value:GL_REPEAT];
+   [self.baseEffect.texture2d1 aglkSetParameter:GL_TEXTURE_WRAP_T value:GL_REPEAT];
 }
 
 
@@ -238,7 +212,8 @@ static const SceneVertex vertices[] =
    
    _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
    
-   _rotation += self.timeSinceLastUpdate * 0.5f;
+    _rotation += self.timeSinceLastUpdate * 0.5f;
+//   _rotation = self.timeSinceLastUpdate * 0.5f;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -349,7 +324,9 @@ static const SceneVertex vertices[] =
    
    // Create and compile fragment shader.
    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];
-   if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname]) {
+   if (![self compileShader:&fragShader 
+                       type:GL_FRAGMENT_SHADER
+                       file:fragShaderPathname]) {
       NSLog(@"Failed to compile fragment shader");
       return NO;
    }

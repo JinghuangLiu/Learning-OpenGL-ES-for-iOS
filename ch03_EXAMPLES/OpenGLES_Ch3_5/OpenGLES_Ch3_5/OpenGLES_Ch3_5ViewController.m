@@ -97,12 +97,9 @@ static const SceneVertex vertices[] =
    CGImageRef imageRef1 = 
       [[UIImage imageNamed:@"beetle.png"] CGImage];
       
-   GLKTextureInfo *textureInfo1 = [GLKTextureLoader 
-      textureWithCGImage:imageRef1 
-      options:[NSDictionary dictionaryWithObjectsAndKeys:
-         [NSNumber numberWithBool:YES], 
-         GLKTextureLoaderOriginBottomLeft, nil] 
-      error:NULL];
+   GLKTextureInfo *textureInfo1 = [GLKTextureLoader textureWithCGImage:imageRef1
+                                                               options:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],GLKTextureLoaderOriginBottomLeft, nil]
+                                                                 error:NULL];
 
    self.baseEffect.texture2d1.name = textureInfo1.name;
    self.baseEffect.texture2d1.target = textureInfo1.target;
@@ -139,8 +136,8 @@ static const SceneVertex vertices[] =
 
    // Draw triangles using currently bound vertex buffer
    [self.vertexBuffer drawArrayWithMode:GL_TRIANGLES
-      startVertexIndex:0
-      numberOfVertices:sizeof(vertices) / sizeof(SceneVertex)];
+                       startVertexIndex:0
+                       numberOfVertices:sizeof(vertices) / sizeof(SceneVertex)];
 }
 
 
