@@ -22,11 +22,21 @@ SceneVertex;
 
 /////////////////////////////////////////////////////////////////
 // Define vertex data for a triangle to use in example
-static const SceneVertex vertices[] = 
+//static const SceneVertex vertices[] = 
+//{
+//   {{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}}, // lower left corner
+//   {{ 0.5f, -0.5f, 0.0f}, {1.0f, 0.0f}}, // lower right corner
+//   {{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}}, // upper left corner
+//};
+
+static const SceneVertex vertices[] =
 {
    {{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}}, // lower left corner
    {{ 0.5f, -0.5f, 0.0f}, {1.0f, 0.0f}}, // lower right corner
    {{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}}, // upper left corner
+    {{ 0.5f, -0.5f, 0.0f}, {1.0f, 0.0f}}, // lower right corner
+    {{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}}, // upper left corner
+    {{0.5f, 0.5f, 0.0f}, {1.0f, 1.0f}}, // upper right corner
 };
 
 
@@ -114,7 +124,7 @@ static const SceneVertex vertices[] =
    // currently bound vertex buffer
    [self.vertexBuffer drawArrayWithMode:GL_TRIANGLES
       startVertexIndex:0
-      numberOfVertices:3];
+      numberOfVertices:6];
 }
 
 
